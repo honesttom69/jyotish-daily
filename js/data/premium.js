@@ -4,8 +4,7 @@
 
 import { savePremiumStatus, isPremium } from './storage.js';
 
-// TODO: Replace with your actual Gumroad product ID after creating the product
-const GUMROAD_PRODUCT_ID = 'PLACEHOLDER';
+const GUMROAD_PRODUCT_ID = 'ecukiv';
 const VERIFY_URL = 'https://api.gumroad.com/v2/licenses/verify';
 
 /**

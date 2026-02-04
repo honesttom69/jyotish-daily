@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Jyotish Daily - Vedic Transit App</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0d1117">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Jyotish Daily">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">JYOTISH DAILY</div>
+      <div class="header-actions">
+        <button class="icon-btn" data-screen="calendar">&#x1F4C5;</button>
+        <button class="icon-btn" data-screen="profiles">&#x2699;&#xFE0F;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN SCREEN ==================== -->
+  <div id="main-screen" class="screen active">
+    <div class="container">
+
+      <!-- Date Selector -->
+      <div class="date-selector">
+        <button class="date-arrow" id="date-prev">&#x25C0;</button>
+        <div class="current-date">
+          <div class="day" id="date-day-label">Today</div>
+          <div class="full-date" id="date-full"></div>
+        </div>
+        <button class="date-arrow" id="date-next">&#x25B6;</button>
+        <button class="today-btn" id="date-today">TODAY</button>
+      </div>
+
+      <!-- Profile Card -->
+      <div class="profile-card">
+        <div class="profile-avatar">TH</div>
+        <div class="profile-info">
+          <div class="profile-name">Tom Hinkle</div>
+          <div class="profile-details">Leo Asc &bull; Pisces Moon &bull; Revati &#x263D;</div>
+        </div>
+        <div class="profile-dasha">
+          <div class="label">Current Dasha</div>
+          <div class="period">Moon-Rahu</div>
+        </div>
+      </div>
+
+      <!-- Chart Overview -->
+      <div class="chart-overview" id="chart-overview" style="display:none;">
+        <div class="chart-overview-header">
+          <div class="insight-label">Your Chart</div>
+          <button class="chart-overview-toggle" id="chart-overview-toggle">Details &darr;</button>
+        </div>
+        <div class="chart-overview-summary" id="chart-overview-summary"></div>
+        <div class="chart-overview-details" id="chart-overview-details" style="display:none;"></div>
+      </div>
+
+      <!-- Daily Insight -->
+      <div class="insight-section">
+        <div class="insight-label">Today's Guidance</div>
+        <div class="insight-text">
+          Saturn continues through your 8th house, asking for patience with transformation. Moon transits your 4th today &mdash; good for home matters, connecting with family, or quiet reflection. Avoid forcing outcomes; let things unfold.
+        </div>
+      </div>
+
+      <!-- Transit List -->
+      <div class="transit-section">
+        <div class="section-header">
+          <div class="section-title">Active Transits</div>
+          <div class="section-badge">5 active</div>
+        </div>
+
+        <div class="transit-list">
+          <div class="transit-item">
+            <div class="transit-icon neutral">&#x2644;</div>
+            <div class="transit-content">
+              <div class="transit-title">
+                Saturn &rarr; 8th House
+                <span class="transit-tag aspect">Natal Ju</span>
+              </div>
+              <div class="transit-detail">Conjunct natal Jupiter in Pisces &bull; Deep transformation period</div>
+            </div>
+            <div class="transit-arrow">&rsaquo;</div>
+          </div>
+
+          <div class="transit-item">
+            <div class="transit-icon positive">&#x2643;</div>
+            <div class="transit-content">
+              <div class="transit-title">Jupiter &rarr; 11th House</div>
+              <div class="transit-detail">Transiting Gemini &bull; Expansion in friendships &amp; goals</div>
+            </div>
+            <div class="transit-arrow">&rsaquo;</div>
+          </div>
+
+          <div class="transit-item">
+            <div class="transit-icon negative">&#x260A;</div>
+            <div class="transit-content">
+              <div class="transit-title">
+                Rahu &rarr; 8th House
+                <span class="transit-tag conjunction">Conjunct</span>
+              </div>
+              <div class="transit-detail">Approaching natal Moon &bull; Intensity building</div>
+            </div>
+            <div class="transit-arrow">&rsaquo;</div>
+          </div>
+
+          <div class="transit-item">
+            <div class="transit-icon positive">&#x263D;</div>
+            <div class="transit-content">
+              <div class="transit-title">Moon &rarr; 4th House</div>
+              <div class="transit-detail">Transiting Scorpio today &bull; Emotional depth, home focus</div>
+            </div>
+            <div class="transit-arrow">&rsaquo;</div>
+          </div>
+
+          <div class="transit-item">
+            <div class="transit-icon neutral">&#x263F;</div>
+            <div class="transit-content">
+              <div class="transit-title">Mercury &rarr; 6th House</div>
+              <div class="transit-detail">Transiting Capricorn &bull; Good for health routines, work details</div>
+            </div>
+            <div class="transit-arrow">&rsaquo;</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart Display -->
+      <div class="chart-section">
+        <div class="chart-header">
+          <div class="chart-title">Natal + Transits</div>
+          <div class="chart-toggle">
+            <button class="toggle-btn active" data-style="south">South</button>
+            <button class="toggle-btn" data-style="north">North</button>
+          </div>
+        </div>
+
+        <div class="chart-grid"></div>
+
+        <div class="legend">
+          <div class="legend-item">
+            <span class="legend-dot" style="background: var(--accent);"></span> Natal
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot" style="background: var(--positive);"></span> Transit
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== SETUP SCREEN ==================== -->
+  <div id="setup-screen" class="screen">
+    <div class="container">
+      <div class="setup-screen">
+        <button class="back-link" id="setup-back">&larr; Back to Profiles</button>
+        <div class="setup-title">Your Cosmic Profile</div>
+        <div class="setup-subtitle">Enter your birth details for personalized Vedic guidance</div>
+
+        <form class="setup-form" id="setup-form">
+          <div class="form-group">
+            <label class="form-label" for="input-name">Name</label>
+            <input type="text" class="form-input" id="input-name" placeholder="Your name" required value="Tom Hinkle">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-date">Birth Date</label>
+            <input type="date" class="form-input" id="input-date" required value="1987-12-01">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-time">Birth Time</label>
+            <input type="time" class="form-input" id="input-time" required value="00:05">
+            <label class="time-uncertain">
+              <input type="checkbox" id="input-time-uncertain"> I'm not sure of the exact time
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-place">Birth Place</label>
+            <input type="text" class="form-input" id="input-place" placeholder="City, Country" value="Pottsville, Pennsylvania, USA">
+            <div id="geocode-status" style="font-size: 11px; color: var(--text-muted); margin-top: 4px;"></div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-timezone">Birth Timezone</label>
+            <select class="form-input" id="input-timezone"></select>
+          </div>
+
+          <div class="form-group">
+            <label class="time-uncertain" style="margin-bottom: 8px; margin-top: 0;">
+              <input type="checkbox" id="input-manual-coords"> Enter coordinates manually
+            </label>
+            <div id="coords-fields" class="form-row" style="display: none;">
+              <div>
+                <label class="form-label" for="input-lat">Latitude</label>
+                <input type="number" step="any" class="form-input" id="input-lat" placeholder="40.6856">
+              </div>
+              <div>
+                <label class="form-label" for="input-lng">Longitude</label>
+                <input type="number" step="any" class="form-input" id="input-lng" placeholder="-76.1955">
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submit-btn">Calculate My Chart</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CALENDAR SCREEN ==================== -->
+  <div id="calendar-screen" class="screen">
+    <div class="container">
+      <div class="section-header" style="margin-bottom: 20px;">
+        <div class="section-title" id="cal-title"></div>
+        <div class="calendar-nav">
+          <button class="date-arrow" id="cal-prev">&#x25C0;</button>
+          <button class="date-arrow" id="cal-next">&#x25B6;</button>
+        </div>
+      </div>
+
+      <div class="calendar-grid" id="cal-grid"></div>
+
+      <div class="legend">
+        <div class="legend-item">
+          <span class="legend-dot" style="background: var(--positive);"></span> Favorable
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="background: var(--accent);"></span> Mixed
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="background: var(--negative);"></span> Challenging
+        </div>
+      </div>
+
+      <!-- Selected Day Detail (placeholder) -->
+      <div class="insight-section" style="margin-top: 20px;">
+        <div class="insight-label" id="cal-selected-label">Select a day</div>
+        <div class="insight-text" id="cal-selected-detail">
+          Tap a day on the calendar to see transit details.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== DASHAS SCREEN ==================== -->
+  <div id="dashas-screen" class="screen">
+    <div class="container">
+      <div id="dasha-container"></div>
+    </div>
+  </div>
+
+  <!-- ==================== LEARN SCREEN ==================== -->
+  <div id="learn-screen" class="screen">
+    <div class="container">
+      <div class="learn-tabs">
+        <button class="learn-tab active" data-topic="houses">Houses</button>
+        <button class="learn-tab" data-topic="planets">Planets</button>
+        <button class="learn-tab" data-topic="signs">Signs</button>
+        <button class="learn-tab" data-topic="aspects">Aspects</button>
+      </div>
+      <div id="learn-content"></div>
+    </div>
+  </div>
+
+  <!-- ==================== PROFILES SCREEN ==================== -->
+  <div id="profiles-screen" class="screen">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-title">Your Profiles</div>
+        <div class="section-badge" id="profile-count-badge">0 / 5</div>
+      </div>
+
+      <div id="profile-list"></div>
+
+      <button class="add-profile-btn" id="add-profile-btn">+ Add Profile</button>
+
+      <!-- Premium upsell (hidden when premium) -->
+      <div class="premium-gate" id="premium-gate" style="display:none;">
+        <div class="premium-title">Unlock Multiple Profiles</div>
+        <div class="premium-desc">Track charts for family and friends. Enter your license key below.</div>
+        <div class="premium-input-row">
+          <input type="text" class="form-input" id="license-key-input"
+                 placeholder="License key from Gumroad">
+          <button class="submit-btn" id="verify-license-btn">Unlock</button>
+        </div>
+        <div id="license-status" style="font-size: 12px; margin-top: 8px;"></div>
+        <a href="#" id="gumroad-link" target="_blank" class="gumroad-link">
+          Get a license on Gumroad &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== BOTTOM NAV ==================== -->
+  <nav class="bottom-nav">
+    <div class="nav-content">
+      <button class="nav-item active" data-screen="main">
+        <span class="nav-icon">&#x25C9;</span>
+        <span>Today</span>
+      </button>
+      <button class="nav-item" data-screen="calendar">
+        <span class="nav-icon">&#x1F4C5;</span>
+        <span>Calendar</span>
+      </button>
+      <button class="nav-item" data-screen="dashas">
+        <span class="nav-icon">&#x1F4CA;</span>
+        <span>Dashas</span>
+      </button>
+      <button class="nav-item" data-screen="learn">
+        <span class="nav-icon">&#x1F4D6;</span>
+        <span>Learn</span>
+      </button>
+      <button class="nav-item" data-screen="profiles">
+        <span class="nav-icon">&#x1F464;</span>
+        <span>Profile</span>
+      </button>
+    </div>
+  </nav>
+
+  <script src="js/calc/astronomy-engine.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

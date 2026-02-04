@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vedic Transit App - UI Mockup</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0d1117;
+      --bg-secondary: #161b22;
+      --bg-tertiary: #21262d;
+      --text-primary: #e6edf3;
+      --text-secondary: #8b949e;
+      --text-muted: #6e7681;
+      --accent: #c9a227;
+      --accent-dim: #8b7355;
+      --positive: #3fb950;
+      --negative: #f85149;
+      --neutral: #8b949e;
+      --border: #30363d;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* ==================== HEADER ==================== */
+    .header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .icon-btn:hover {
+      color: var(--text-primary);
+    }
+
+    /* ==================== MAIN CONTAINER ==================== */
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* ==================== DATE SELECTOR ==================== */
+    .date-selector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding: 12px;
+      background: var(--bg-secondary);
+      border-radius: 12px;
+    }
+
+    .date-arrow {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 20px;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .date-arrow:hover {
+      color: var(--accent);
+    }
+
+    .current-date {
+      text-align: center;
+    }
+
+    .current-date .day {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .current-date .full-date {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .today-btn {
+      background: var(--accent);
+      color: var(--bg-primary);
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    /* ==================== PROFILE CARD ==================== */
+    .profile-card {
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .profile-avatar {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dim));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .profile-info {
+      flex: 1;
+    }
+
+    .profile-name {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .profile-details {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .profile-dasha {
+      text-align: right;
+    }
+
+    .profile-dasha .label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .profile-dasha .period {
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ==================== CHART DISPLAY ==================== */
+    .chart-section {
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .chart-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .chart-toggle {
+      display: flex;
+      gap: 4px;
+    }
+
+    .toggle-btn {
+      background: var(--bg-tertiary);
+      border: none;
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      font-size: 11px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .toggle-btn.active {
+      background: var(--accent);
+      color: var(--bg-primary);
+    }
+
+    /* South Indian Chart Grid */
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 2px;
+      aspect-ratio: 1;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .chart-cell {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      padding: 4px;
+      font-size: 9px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .chart-cell.empty {
+      background: var(--bg-secondary);
+      border: none;
+    }
+
+    .chart-cell .sign {
+      font-size: 8px;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .chart-cell .house-num {
+      position: absolute;
+      top: 2px;
+      right: 4px;
+      font-size: 8px;
+      color: var(--text-muted);
+    }
+
+    .chart-cell .planets {
+      font-size: 10px;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .chart-cell .planets .natal {
+      color: var(--accent);
+    }
+
+    .chart-cell .planets .transit {
+      color: var(--positive);
+    }
+
+    /* ==================== TRANSIT LIST ==================== */
+    .transit-section {
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .section-badge {
+      background: var(--bg-tertiary);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .transit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .transit-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px;
+      background: var(--bg-tertiary);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .transit-item:hover {
+      background: var(--border);
+    }
+
+    .transit-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .transit-icon.positive { background: rgba(63, 185, 80, 0.15); }
+    .transit-icon.negative { background: rgba(248, 81, 73, 0.15); }
+    .transit-icon.neutral { background: rgba(139, 148, 158, 0.15); }
+
+    .transit-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .transit-title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .transit-tag {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .transit-tag.conjunction { background: var(--accent); color: var(--bg-primary); }
+    .transit-tag.aspect { background: var(--bg-primary); color: var(--text-secondary); border: 1px solid var(--border); }
+
+    .transit-detail {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .transit-arrow {
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+    }
+
+    /* ==================== DAILY INSIGHT ==================== */
+    .insight-section {
+      background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .insight-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .insight-text {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-primary);
+    }
+
+    .insight-expand {
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--accent);
+      cursor: pointer;
+    }
+
+    /* ==================== BOTTOM NAV ==================== */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 8px 16px 24px;
+    }
+
+    .nav-content {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 10px;
+      cursor: pointer;
+    }
+
+    .nav-item.active {
+      color: var(--accent);
+    }
+
+    .nav-item .nav-icon {
+      font-size: 20px;
+    }
+
+    /* ==================== SCREENS ==================== */
+    .screen {
+      display: none;
+      padding-bottom: 80px;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    /* ==================== SETUP SCREEN ==================== */
+    .setup-screen {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .setup-title {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .setup-subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+    }
+
+    .setup-form {
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-input {
+      width: 100%;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--text-primary);
+      font-size: 16px;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .time-uncertain {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 8px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--accent);
+      color: var(--bg-primary);
+      border: none;
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 24px;
+    }
+
+    .submit-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* ==================== CALENDAR SCREEN ==================== */
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      margin-bottom: 20px;
+    }
+
+    .calendar-header {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 8px 0;
+    }
+
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-tertiary);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      position: relative;
+    }
+
+    .calendar-day:hover {
+      background: var(--border);
+    }
+
+    .calendar-day.today {
+      border: 2px solid var(--accent);
+    }
+
+    .calendar-day.selected {
+      background: var(--accent);
+      color: var(--bg-primary);
+    }
+
+    .calendar-day .quality-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 4px;
+    }
+
+    .calendar-day .quality-dot.good { background: var(--positive); }
+    .calendar-day .quality-dot.mixed { background: var(--accent); }
+    .calendar-day .quality-dot.challenging { background: var(--negative); }
+
+    .calendar-day.other-month {
+      opacity: 0.3;
+    }
+
+    /* ==================== LEGEND ==================== */
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 12px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* ==================== RESPONSIVE ==================== */
+    @media (min-width: 768px) {
+      .container {
+        padding: 24px;
+      }
+
+      .chart-cell {
+        padding: 8px;
+        font-size: 11px;
+      }
+
+      .chart-cell .sign {
+        font-size: 10px;
+      }
+
+      .chart-cell .planets {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">JYOTISH DAILY</div>
+      <div class="header-actions">
+        <button class="icon-btn" onclick="showScreen('calendar')">📅</button>
+        <button class="icon-btn" onclick="showScreen('setup')">⚙️</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN SCREEN ==================== -->
+  <div id="main-screen" class="screen active">
+    <div class="container">
+
+      <!-- Date Selector -->
+      <div class="date-selector">
+        <button class="date-arrow">◀</button>
+        <div class="current-date">
+          <div class="day">Today</div>
+          <div class="full-date">Monday, January 27, 2026</div>
+        </div>
+        <button class="date-arrow">▶</button>
+        <button class="today-btn">TODAY</button>
+      </div>
+
+      <!-- Profile Card -->
+      <div class="profile-card">
+        <div class="profile-avatar">TH</div>
+        <div class="profile-info">
+          <div class="profile-name">Tom Hinkle</div>
+          <div class="profile-details">Leo Asc • Pisces Moon • Revati ☽</div>
+        </div>
+        <div class="profile-dasha">
+          <div class="label">Current Dasha</div>
+          <div class="period">Moon-Rahu</div>
+        </div>
+      </div>
+
+      <!-- Daily Insight -->
+      <div class="insight-section">
+        <div class="insight-label">Today's Guidance</div>
+        <div class="insight-text">
+          Saturn continues through your 8th house, asking for patience with transformation. Moon transits your 4th today - good for home matters, connecting with family, or quiet reflection. Avoid forcing outcomes; let things unfold.
+        </div>
+        <div class="insight-expand">Read more →</div>
+      </div>
+
+      <!-- Transit List -->
+      <div class="transit-section">
+        <div class="section-header">
+          <div class="section-title">Active Transits</div>
+          <div class="section-badge">5 active</div>
+        </div>
+
+        <div class="transit-list">
+          <div class="transit-item">
+            <div class="transit-icon neutral">♄</div>
+            <div class="transit-content">
+              <div class="transit-title">
+                Saturn → 8th House
+                <span class="transit-tag aspect">Natal Ju</span>
+              </div>
+              <div class="transit-detail">Conjunct natal Jupiter in Pisces • Deep transformation period</div>
+            </div>
+            <div class="transit-arrow">›</div>
+          </div>
+
+          <div class="transit-item">
+            <div class="transit-icon positive">♃</div>
+            <div class="transit-content">
+              <div class="transit-title">
+                Jupiter → 11th House
+              </div>
+              <div class="transit-detail">Transiting Gemini • Expansion in friendships & goals</div>
+            </div>
+            <div class="transit-arrow">›</div>
+          </div>
+
+          <div class="transit-item">
+            <div class="transit-icon negative">☊</div>
+            <div class="transit-content">
+              <div class="transit-title">
+                Rahu → 8th House
+                <span class="transit-tag conjunction">Conjunct</span>
+              </div>
+              <div class="transit-detail">Approaching natal Moon • Intensity building</div>
+            </div>
+            <div class="transit-arrow">›</div>
+          </div>
+
+          <div class="transit-item">
+            <div class="transit-icon positive">☽</div>
+            <div class="transit-content">
+              <div class="transit-title">
+                Moon → 4th House
+              </div>
+              <div class="transit-detail">Transiting Scorpio today • Emotional depth, home focus</div>
+            </div>
+            <div class="transit-arrow">›</div>
+          </div>
+
+          <div class="transit-item">
+            <div class="transit-icon neutral">☿</div>
+            <div class="transit-content">
+              <div class="transit-title">
+                Mercury → 6th House
+              </div>
+              <div class="transit-detail">Transiting Capricorn • Good for health routines, work details</div>
+            </div>
+            <div class="transit-arrow">›</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart Display -->
+      <div class="chart-section">
+        <div class="chart-header">
+          <div class="chart-title">Natal + Transits</div>
+          <div class="chart-toggle">
+            <button class="toggle-btn active">South</button>
+            <button class="toggle-btn">North</button>
+            <button class="toggle-btn">Wheel</button>
+          </div>
+        </div>
+
+        <!-- South Indian Style Chart -->
+        <div class="chart-grid">
+          <!-- Row 1 -->
+          <div class="chart-cell">
+            <span class="sign">Pisces</span>
+            <span class="house-num">8</span>
+            <div class="planets">
+              <span class="natal">Ju Mo Ra</span><br>
+              <span class="transit">♄ ☊</span>
+            </div>
+          </div>
+          <div class="chart-cell">
+            <span class="sign">Aries</span>
+            <span class="house-num">9</span>
+            <div class="planets"></div>
+          </div>
+          <div class="chart-cell">
+            <span class="sign">Taurus</span>
+            <span class="house-num">10</span>
+            <div class="planets"></div>
+          </div>
+          <div class="chart-cell">
+            <span class="sign">Gemini</span>
+            <span class="house-num">11</span>
+            <div class="planets">
+              <span class="transit">♃</span>
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="chart-cell">
+            <span class="sign">Aquarius</span>
+            <span class="house-num">7</span>
+            <div class="planets"></div>
+          </div>
+          <div class="chart-cell empty"></div>
+          <div class="chart-cell empty"></div>
+          <div class="chart-cell">
+            <span class="sign">Cancer</span>
+            <span class="house-num">12</span>
+            <div class="planets"></div>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="chart-cell">
+            <span class="sign">Capricorn</span>
+            <span class="house-num">6</span>
+            <div class="planets">
+              <span class="transit">☿ ☉</span>
+            </div>
+          </div>
+          <div class="chart-cell empty"></div>
+          <div class="chart-cell empty"></div>
+          <div class="chart-cell">
+            <span class="sign">Leo</span>
+            <span class="house-num">1</span>
+            <div class="planets">
+              <span class="natal">As</span>
+            </div>
+          </div>
+
+          <!-- Row 4 -->
+          <div class="chart-cell">
+            <span class="sign">Sagittarius</span>
+            <span class="house-num">5</span>
+            <div class="planets">
+              <span class="natal">Ve</span><br>
+              <span class="transit">♀</span>
+            </div>
+          </div>
+          <div class="chart-cell">
+            <span class="sign">Scorpio</span>
+            <span class="house-num">4</span>
+            <div class="planets">
+              <span class="natal">Su Me Sa</span><br>
+              <span class="transit">☽</span>
+            </div>
+          </div>
+          <div class="chart-cell">
+            <span class="sign">Libra</span>
+            <span class="house-num">3</span>
+            <div class="planets">
+              <span class="natal">Ma</span><br>
+              <span class="transit">♂</span>
+            </div>
+          </div>
+          <div class="chart-cell">
+            <span class="sign">Virgo</span>
+            <span class="house-num">2</span>
+            <div class="planets">
+              <span class="natal">Ke</span><br>
+              <span class="transit">☋</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="legend">
+          <div class="legend-item">
+            <span style="color: var(--accent);">●</span> Natal
+          </div>
+          <div class="legend-item">
+            <span style="color: var(--positive);">●</span> Transit
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== SETUP SCREEN ==================== -->
+  <div id="setup-screen" class="screen">
+    <div class="container">
+      <div class="setup-screen">
+        <div class="setup-title">Your Cosmic Profile</div>
+        <div class="setup-subtitle">Enter your birth details for personalized Vedic guidance</div>
+
+        <div class="setup-form">
+          <div class="form-group">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-input" placeholder="Your name" value="Tom Hinkle">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Birth Date</label>
+            <input type="date" class="form-input" value="1987-12-01">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Birth Time</label>
+            <input type="time" class="form-input" value="00:05">
+            <label class="time-uncertain">
+              <input type="checkbox"> I'm not sure of the exact time
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Birth Place</label>
+            <input type="text" class="form-input" placeholder="City, Country" value="Pottsville, Pennsylvania, USA">
+          </div>
+
+          <button class="submit-btn" onclick="showScreen('main')">Calculate My Chart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CALENDAR SCREEN ==================== -->
+  <div id="calendar-screen" class="screen">
+    <div class="container">
+      <div class="section-header" style="margin-bottom: 20px;">
+        <div class="section-title">January 2026</div>
+        <div style="display: flex; gap: 8px;">
+          <button class="date-arrow">◀</button>
+          <button class="date-arrow">▶</button>
+        </div>
+      </div>
+
+      <div class="calendar-grid">
+        <div class="calendar-header">Su</div>
+        <div class="calendar-header">Mo</div>
+        <div class="calendar-header">Tu</div>
+        <div class="calendar-header">We</div>
+        <div class="calendar-header">Th</div>
+        <div class="calendar-header">Fr</div>
+        <div class="calendar-header">Sa</div>
+
+        <div class="calendar-day other-month">28</div>
+        <div class="calendar-day other-month">29</div>
+        <div class="calendar-day other-month">30</div>
+        <div class="calendar-day other-month">31</div>
+        <div class="calendar-day">1<div class="quality-dot good"></div></div>
+        <div class="calendar-day">2<div class="quality-dot good"></div></div>
+        <div class="calendar-day">3<div class="quality-dot mixed"></div></div>
+
+        <div class="calendar-day">4<div class="quality-dot mixed"></div></div>
+        <div class="calendar-day">5<div class="quality-dot good"></div></div>
+        <div class="calendar-day">6<div class="quality-dot challenging"></div></div>
+        <div class="calendar-day">7<div class="quality-dot challenging"></div></div>
+        <div class="calendar-day">8<div class="quality-dot mixed"></div></div>
+        <div class="calendar-day">9<div class="quality-dot good"></div></div>
+        <div class="calendar-day">10<div class="quality-dot good"></div></div>
+
+        <div class="calendar-day">11<div class="quality-dot good"></div></div>
+        <div class="calendar-day">12<div class="quality-dot mixed"></div></div>
+        <div class="calendar-day">13<div class="quality-dot mixed"></div></div>
+        <div class="calendar-day">14<div class="quality-dot good"></div></div>
+        <div class="calendar-day">15<div class="quality-dot good"></div></div>
+        <div class="calendar-day">16<div class="quality-dot mixed"></div></div>
+        <div class="calendar-day">17<div class="quality-dot challenging"></div></div>
+
+        <div class="calendar-day">18<div class="quality-dot challenging"></div></div>
+        <div class="calendar-day">19<div class="quality-dot mixed"></div></div>
+        <div class="calendar-day">20<div class="quality-dot good"></div></div>
+        <div class="calendar-day">21<div class="quality-dot good"></div></div>
+        <div class="calendar-day">22<div class="quality-dot good"></div></div>
+        <div class="calendar-day">23<div class="quality-dot mixed"></div></div>
+        <div class="calendar-day">24<div class="quality-dot mixed"></div></div>
+
+        <div class="calendar-day">25<div class="quality-dot good"></div></div>
+        <div class="calendar-day">26<div class="quality-dot mixed"></div></div>
+        <div class="calendar-day today selected">27<div class="quality-dot mixed"></div></div>
+        <div class="calendar-day">28<div class="quality-dot good"></div></div>
+        <div class="calendar-day">29<div class="quality-dot good"></div></div>
+        <div class="calendar-day">30<div class="quality-dot challenging"></div></div>
+        <div class="calendar-day">31<div class="quality-dot mixed"></div></div>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-dot" style="background: var(--positive);"></div> Favorable
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: var(--accent);"></div> Mixed
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: var(--negative);"></div> Challenging
+        </div>
+      </div>
+
+      <!-- Selected Day Detail -->
+      <div class="insight-section" style="margin-top: 20px;">
+        <div class="insight-label">January 27</div>
+        <div class="insight-text">
+          Moon transits your 4th house today. Saturn continues its conjunction with natal Jupiter. Mixed energy - good for inner work, home projects, avoid major external initiatives.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== BOTTOM NAV ==================== -->
+  <nav class="bottom-nav">
+    <div class="nav-content">
+      <div class="nav-item active" onclick="showScreen('main')">
+        <span class="nav-icon">◉</span>
+        <span>Today</span>
+      </div>
+      <div class="nav-item" onclick="showScreen('calendar')">
+        <span class="nav-icon">📅</span>
+        <span>Calendar</span>
+      </div>
+      <div class="nav-item">
+        <span class="nav-icon">📊</span>
+        <span>Dashas</span>
+      </div>
+      <div class="nav-item" onclick="showScreen('setup')">
+        <span class="nav-icon">👤</span>
+        <span>Profile</span>
+      </div>
+    </div>
+  </nav>
+
+  <script>
+    function showScreen(screenName) {
+      // Hide all screens
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+
+      // Show selected screen
+      document.getElementById(screenName + '-screen').classList.add('active');
+
+      // Update nav
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      event.currentTarget?.classList?.add('active');
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head><title>Gumroad Cover Generator</title></head>
+<body style="background:#222;color:#fff;font-family:sans-serif;padding:40px;text-align:center;">
+  <h2>Gumroad Cover Image Generator</h2>
+  <p>Click the button to download a 1280x720 cover image for Gumroad.</p>
+  <p style="color:#8b949e;font-size:14px;">The center area (shown in preview) will be used for the square thumbnail.</p>
+  <div style="margin:20px;">
+    <button onclick="generate()" style="padding:12px 24px;font-size:16px;cursor:pointer;">Download 1280x720 Cover</button>
+  </div>
+  <canvas id="c" style="border:1px solid #444;margin-top:20px;max-width:100%;"></canvas>
+  <script>
+    async function generate() {
+      const width = 1280;
+      const height = 720;
+      const canvas = document.getElementById('c');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+
+      // Background
+      ctx.fillStyle = '#0d1117';
+      ctx.fillRect(0, 0, width, height);
+
+      // Subtle radial gradient overlay for depth
+      const gradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, 500);
+      gradient.addColorStop(0, 'rgba(201, 162, 39, 0.08)');
+      gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
+
+      // Load and draw icon
+      const img = new Image();
+      img.onload = () => {
+        // Draw icon centered
+        const iconSize = 200;
+        const iconX = (width - iconSize) / 2;
+        const iconY = 140;
+        ctx.drawImage(img, iconX, iconY, iconSize, iconSize);
+
+        // Title text
+        ctx.fillStyle = '#c9a227';
+        ctx.font = 'bold 64px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('Jyotish Daily', width / 2, 420);
+
+        // Subtitle
+        ctx.fillStyle = '#e6edf3';
+        ctx.font = '36px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.fillText('Premium Unlock', width / 2, 480);
+
+        // Feature bullets
+        ctx.fillStyle = '#8b949e';
+        ctx.font = '28px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.fillText('Up to 5 profiles  •  Lifetime access  •  No subscription', width / 2, 560);
+
+        // Decorative line
+        ctx.strokeStyle = '#c9a227';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(width/2 - 200, 620);
+        ctx.lineTo(width/2 + 200, 620);
+        ctx.stroke();
+
+        // Bottom tagline
+        ctx.fillStyle = '#6e7681';
+        ctx.font = '22px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.fillText('Vedic Astrology Transit App', width / 2, 665);
+
+        // Download
+        const a = document.createElement('a');
+        a.download = 'jyotish-daily-gumroad-cover.png';
+        a.href = canvas.toDataURL('image/png');
+        a.click();
+      };
+      img.src = 'icon.svg';
+    }
+  </script>
+</body>
+</html>

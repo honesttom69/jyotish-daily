@@ -1,8 +1,9 @@
-const CACHE_NAME = 'jyotish-v10';
+const CACHE_NAME = 'jyotish-v11';
 
 const SHELL_ASSETS = [
   './',
   './index.html',
+  './privacy-policy.html',
   './css/styles.css',
   './js/app.js',
   './js/calc/astronomy-engine.js',

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jyotish-v11';
+const CACHE_NAME = 'jyotish-v12';
 
 const SHELL_ASSETS = [
   './',
